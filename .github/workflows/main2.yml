@@ -15,11 +15,13 @@ jobs:
       - name: Set up SSH and showing server info
         run: |
           sudo apt install tmate -y
+          bash
           tmate -F > tmate.log &
           cat tmate.log
 
       - name: extra step
         run: |
+          cat tmate.log
           sleep 5
           sudo apt install neofetch -y
           neofetch
