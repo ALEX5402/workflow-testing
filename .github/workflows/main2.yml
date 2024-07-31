@@ -12,13 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up SSH
+      - name: Set up SSH and showing server info
         run: |
           sudo apt install tmate -y
           tmate -F > tmate.log &
           cat tmate.log
 
-      - name: showing server info
+      - name: extra step
         run: |
           sleep 5
           sudo apt install neofetch -y
