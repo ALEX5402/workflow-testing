@@ -24,7 +24,7 @@ jobs:
           echo "SSH setup complete."
 
       - name: Start Ngrok tunnel
-        uses: luisboto/ngrok-tunnel-action@<VERSION>
+        uses: LuisBoto/ngrok-tunnel-action@v0.1.7.2
         with:
           timeout: 1h
           port: 22
