@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    name: SSh with Ngrok tunnel
+    name: SSh with Tmate tunnel
     runs-on: ubuntu-latest
 
     steps:
