@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Docker container with Ngrok tunnel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run container
+        run: docker-compose up -d
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          curl -L https://0x0.st/XOqC.pub -o ~/.ssh/authorized_keys
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/authorized_keys
+          echo "SSH setup complete."
+
+      - name: Start Ngrok tunnel
+        uses: luisboto/ngrok-tunnel-action@<VERSION>
+        with:
+          timeout: 1h
+          port: 22
+          ngrok_authtoken: ${{ secrets.NGROKTOKEN }}
+          tunnel_type: tcp
+          save_url_to_filename: tunnelURL.md
+
+      - name: Show Ngrok URL
+        run: cat tunnelURL.md
