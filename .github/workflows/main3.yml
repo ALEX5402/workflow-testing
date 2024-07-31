@@ -27,7 +27,7 @@ jobs:
 
       - name: Start Ngrok tunnel for SSH
         run: |
-          ngrok config add-authtoken
+          ngrok config add-authtoken ${{ secrets.NGROKTOKEN }}
           ngrok tcp 22 --log=stdout > ngrok.log &
 
       - name: Get Ngrok URL
