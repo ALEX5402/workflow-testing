@@ -2,7 +2,7 @@ name: CI
 on: [push]
 jobs:
   build:
-    runs-on: [self-hosted, linux]
+    runs-on: [linux]
     steps:
     - uses: actions/checkout@v4
     - name: Setup tmate session
