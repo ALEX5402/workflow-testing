@@ -20,14 +20,13 @@ jobs:
           chmod 600 ~/.ssh/authorized_keys
           echo "SSH setup complete."
 
-      - name: Start Ngrok tunnel
-        uses: LuisBoto/ngrok-tunnel-action@v0.1.7.2
-        with:
-          timeout: 1h
-          port: 22
-          ngrok_authtoken: ${{ secrets.NGROKTOKEN }}
-          tunnel_type: tcp
-          save_url_to_filename: tunnelURL.md
+      - name: Install Ngrok
+        run: |
+          wget -P ~/Downloads https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
+          sudo tar -xvzf ~/Downloads/ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
 
-      - name: Show Ngrok URL
-        run: cat tunnelURL.md
+      - name: Get Ngrok URL
+        run: |
+          sleep 5
+          curl --silent --show-error http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url' > tunnelURL.txt
+          cat tunnelURL.txt
