@@ -1,14 +1,28 @@
-name: coustom tmate
+name: actions with ssh
+
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
+    name: SSh with Ngrok tunnel
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup tmate session
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
         run: |
           sudo apt install tmate -y
-          tmate -F
+          tmate > tmate.log &
+          cat tmate.log
+
+      - name: showing server info
+        run: |
+          sleep 5
+          sudo apt install neofetch -y
+          neofetch
+
+      - name: Keep the job active
+        run: sleep $((14 * 24 * 60 * 60))
