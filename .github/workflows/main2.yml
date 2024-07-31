@@ -10,13 +10,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up SSH and showing server info
         run: |
           sudo apt install tmate -y
-          sudo apt install xterm -y
-          xterm tmate &
+          tmate &
 
       - name: extra step
         run: |
