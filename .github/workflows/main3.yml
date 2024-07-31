@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    name: Docker container with Ngrok tunnel
+    name: SSh with Ngrok tunnel
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +24,9 @@ jobs:
         run: |
           wget -P ~/Downloads https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
           sudo tar -xvzf ~/Downloads/ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
+
+      - name: Start Ngrok tunnel for SSH
+        run: ngrok config add-authtoken && ngrok tcp 22 --log=stdout > ngrok.log &
 
       - name: Get Ngrok URL
         run: |
