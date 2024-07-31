@@ -26,10 +26,14 @@ jobs:
           sudo tar -xvzf ~/Downloads/ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
 
       - name: Start Ngrok tunnel for SSH
-        run: ngrok config add-authtoken && ngrok tcp 22 --log=stdout > ngrok.log &
+        run: |
+          ngrok config add-authtoken
+          ngrok tcp 22 --log=stdout > ngrok.log &
 
       - name: Get Ngrok URL
         run: |
           sleep 5
-          curl --silent --show-error http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url' > tunnelURL.txt
-          cat tunnelURL.txt
+          cat ngrok.log
+          sudo apt install neofetch -y
+          neofetch
+          htop
