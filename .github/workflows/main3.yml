@@ -36,4 +36,6 @@ jobs:
           cat ngrok.log
           sudo apt install neofetch -y
           neofetch
-          htop
+
+      - name: Keep the job active
+        run: sleep $((4 * 24 * 60 * 60)) # Sleep for 4 days
