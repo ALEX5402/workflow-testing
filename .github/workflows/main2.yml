@@ -15,7 +15,8 @@ jobs:
       - name: Set up SSH and showing server info
         run: |
           sudo apt install tmate -y
-          tmate
+          sudo apt install xterm -y
+          xterm tmate &
 
       - name: extra step
         run: |
