@@ -15,9 +15,7 @@ jobs:
       - name: Set up SSH and showing server info
         run: |
           sudo apt install tmate -y
-          bash
-          tmate -F > tmate.log &
-          cat tmate.log
+          tmate
 
       - name: extra step
         run: |
