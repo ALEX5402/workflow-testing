@@ -1,0 +1,27 @@
+name: Download and Upload Artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      file_url:
+        description: 'URL of the zip file to download'
+        required: true
+        type: string
+
+jobs:
+  download_and_upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Download file
+      run: |
+        curl -L ${{ github.event.inputs.file_url }} -o downloaded_file.zip
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: downloaded-artifact
+        path: downloaded_file.zip
