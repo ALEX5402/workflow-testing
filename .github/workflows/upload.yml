@@ -18,7 +18,7 @@ jobs:
 
     - name: Download file
       run: |
-        curl -L ${{ github.event.inputs.file_url }} -o downloaded_file.zip
+        curl -L "${{ github.event.inputs.file_url }}" -o downloaded_file.zip
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
